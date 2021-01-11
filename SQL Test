@@ -1,0 +1,16 @@
+select o.user_id,
+           count(o.order_id) as total_orders,
+           sum(o.box) as total_boxes_ordered,
+           sum(case when o.lunch_type = ‘Deluxe Lunch’ then o.box end) as total_deluxe_boxes,
+           sum(case when o.lunch_type = ‘Basic Lunch’ then o.box end) as total_basic_boxes,
+           sum(case when o.lunch_type = ‘Healthy Lunch’ then o.box end) as total_healthy_boxes ,
+           sum(d.box) as total_boxes_delivered,
+          (sum(o.box)-sum(d.box)) as boxes_remaining,
+          sum(c.cashback) as total_cashback
+from orders o 
+left join delivery d 
+   on o.order_id = d.order_id
+left join cashback c 
+  on d.delivery_id = c.delivery_id
+group by o.user_id
+order by o.user_id
