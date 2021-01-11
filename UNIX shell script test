@@ -1,0 +1,14 @@
+$cat>kulina.txt
+
+Jeruk Buah
+Apel Buah
+Tomat Buah
+
+Bayam Sayuran
+Sawi Sayuran
+Melon Buah
+Kopi Minuman
+Susu Minuman
+Wortel Sayuran
+
+$cat kulina.txt | cut -d ' ' -f 2 | sort -u
